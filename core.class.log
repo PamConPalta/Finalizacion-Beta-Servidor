@@ -1,0 +1,304 @@
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0973E6C9CED30DACBEC',
+    participant: undefined
+  },
+  messageTimestamp: 1681150190,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'hola',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'hola',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56988207243@s.whatsapp.net',
+    fromMe: false,
+    id: '0C5F39223CDF54FFCE2ED703D3464183',
+    participant: undefined
+  },
+  messageTimestamp: 1681150190,
+  pushName: 'Esteban',
+  message: Message {
+    conversation: 'Hola',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Hola',
+  from: '56988207243'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB002DEC7FCB6F037E27B',
+    participant: undefined
+  },
+  messageTimestamp: 1681150194,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'nom',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'nom',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56988207243@s.whatsapp.net',
+    fromMe: false,
+    id: '82417F783B60DCB873D76712C0E739FF',
+    participant: undefined
+  },
+  messageTimestamp: 1681150196,
+  pushName: 'Esteban',
+  message: Message {
+    conversation: '1',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '1',
+  from: '56988207243'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB075170CE110A9CF230B',
+    participant: undefined
+  },
+  messageTimestamp: 1681150199,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'no',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'no',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56988207243@s.whatsapp.net',
+    fromMe: false,
+    id: '549FDC8A35C0C902180A71E8745242E3',
+    participant: undefined
+  },
+  messageTimestamp: 1681150200,
+  pushName: 'Esteban',
+  message: Message {
+    conversation: 'Esteban',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Esteban',
+  from: '56988207243'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0DFC5842F691E43CFD3',
+    participant: undefined
+  },
+  messageTimestamp: 1681150202,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'ja',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'ja',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB05436763660AC7DAC14',
+    participant: undefined
+  },
+  messageTimestamp: 1681150204,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'ha',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'ha',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0F27EDA5B6EE0316405',
+    participant: undefined
+  },
+  messageTimestamp: 1681150205,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'sha',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'sha',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB0A7096687033DC35EB7',
+    participant: undefined
+  },
+  messageTimestamp: 1681150207,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'shbkan4',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'shbkan4',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56988207243@s.whatsapp.net',
+    fromMe: false,
+    id: '91C7AD3A374BCD67F32F954DF5433CCC',
+    participant: undefined
+  },
+  messageTimestamp: 1681150208,
+  pushName: 'Esteban',
+  message: Message {
+    conversation: 'Esteban',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Esteban',
+  from: '56988207243'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB07440D143ACE216ABE2',
+    participant: undefined
+  },
+  messageTimestamp: 1681150209,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'jsj',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'jsj',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56988207243@s.whatsapp.net',
+    fromMe: false,
+    id: '63F65E60130B79FADE88A11FEE77425E',
+    participant: undefined
+  },
+  messageTimestamp: 1681150211,
+  pushName: 'Esteban',
+  message: Message {
+    conversation: 'Hola',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Hola',
+  from: '56988207243'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB01868BA8E0893BB27B0',
+    participant: undefined
+  },
+  messageTimestamp: 1681150211,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'snba',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'snba',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB00F3EF0DABA95B1FE82',
+    participant: undefined
+  },
+  messageTimestamp: 1681150218,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'bkvj',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'bkvj',
+  from: '56972264462'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56972264462@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB08A9D510D36AAF4E531',
+    participant: undefined
+  },
+  messageTimestamp: 1681150220,
+  pushName: 'Maigo',
+  message: Message {
+    conversation: 'hvhv',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'hvhv',
+  from: '56972264462'
+}
