@@ -9,10 +9,12 @@ const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const MySQLAdapter = require("@bot-whatsapp/database/mysql");
 const mysql = require("mysql");
+const abc = require("./arrays");
 
-/**
- * Declaramos las conexiones de MySQL
- */
+abc.abecedario
+abc.email
+
+
 const MYSQL_DB_HOST = "65.109.88.87";
 const MYSQL_DB_USER = "vinto_wp655";
 const MYSQL_DB_PASSWORD = "1234agartha";
@@ -106,12 +108,21 @@ const flowSaludo = addKeyword(["Hola", "Buenas", "HOLA", "Hola"])
   ])
 
   .addAnswer(
-    "Tu nombre?",
+    "¿Tu Nombre?",
     { capture: true },
     (ctx, { fallBack }) => {
-      if (!ctx.body.includes(String)) {
+      val = ctx.body
+      ab = abc.abecedario
+      cont = false
+      for (i = 0; i < ab.length; i++){
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
         return fallBack();
       }
+      nombre = val
     }
   )
 
@@ -119,30 +130,54 @@ const flowSaludo = addKeyword(["Hola", "Buenas", "HOLA", "Hola"])
     "¿Tu Apellido Paterno?",
     { capture: true  },
     (ctx, { fallBack }) => {
-      if (!ctx.body.includes("")) {
+      val = ctx.body
+      ab = abc.abecedario
+      cont = false
+      for (i = 0; i < ab.length; i++){
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
         return fallBack();
       }
-      paterno = ctx.body
+      paterno = val
     }
   )
   .addAnswer(
     "Apellido Materno",
     { capture: true  },
     (ctx, { fallBack }) => {
-      if (!ctx.body.includes("")) {
+      val = ctx.body
+      ab = abc.abecedario
+      cont = false
+      for (i = 0; i < ab.length; i++){
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
         return fallBack();
       }
-      materno = ctx.body
+      materno = val
     }
   )
   .addAnswer(
     "Correo Electronico",
     { capture: true  },
     (ctx, { fallBack }) => {
-      if (!ctx.body.includes("@")) {
+      val = ctx.body
+      ab = abc.email
+      cont = false
+      for (i = 0; i < ab.length; i++){
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
         return fallBack();
       }
-      correo = ctx.body
+      correo = val
       telefono = ctx.from
     }
   )
