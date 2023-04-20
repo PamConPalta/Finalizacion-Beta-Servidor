@@ -3,262 +3,213 @@ const {
   createProvider,
   createFlow,
   addKeyword,
+  addAnswer,
 } = require("@bot-whatsapp/bot");
 
 const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const MySQLAdapter = require("@bot-whatsapp/database/mysql");
-const mysql = require("mysql");
-const abc = require("./arrays");
 
-abc.abecedario
-abc.email
-
-
-const MYSQL_DB_HOST = "65.109.88.87";
-const MYSQL_DB_USER = "vinto_wp655";
-const MYSQL_DB_PASSWORD = "1234agartha";
-const MYSQL_DB_NAME = "vinto_wp655";
+/**
+ * Declaramos las conexiones de MySQL
+ */
+const MYSQL_DB_HOST = "localhost";
+const MYSQL_DB_USER = "prueba";
+const MYSQL_DB_PASSWORD = "1234";
+const MYSQL_DB_NAME = "prueba";
 const MYSQL_DB_PORT = "3306";
 
-const connection = mysql.createConnection({
-  host     : MYSQL_DB_HOST,
-  user     : MYSQL_DB_USER,
-  password : MYSQL_DB_PASSWORD,
-  database : MYSQL_DB_NAME
-});
-
-
-const flowSecundario = addKeyword(["1"]).addAnswer(
-  "preciona el link👉🏻https://agencyagartha.cl/shop/"
-);
-const flowpregunta = addKeyword(["2"]).addAnswer(
-  "preciona el link👉🏻https://agencyagartha.cl/our-services/"
-);
-const flowcanva = addKeyword(["3"]).addAnswer(
-  "preciona el link👉🏻https://www.canva.com/es_mx/pro/"
-);
-const flowmegusto = addKeyword(["7"]).addAnswer("😃");
-const flownomegusto = addKeyword(["8"]).addAnswer("😡");
-const flowcomentario = addKeyword([
-  "finalizar",
-  "Finalizar",
-  "fin",
-  "terminar",
-  "Terminar",
+const flowProductos = addKeyword([
+  "Productos",
+  "productos",
+  "PRODUCTOS",
 ]).addAnswer([
-  "Gracias!!😁 por comunicarte con *Agarta Marketing gency*",
+  "Ingresa aquí 👇",
+  "🔗 https://agencyagartha.cl/shop/",
   "",
-  "estaremos en contacto nuevamente !!!",
+  "Para volver atras escriba *pppp* ➡",
 ]);
 
-const flowpmenu = addKeyword(["menu", "Menu", "MENU", "Listado"]).addAnswer([
-  "MENU📝",
+const flowAtencionComercial = addKeyword([
+  "Atención",
+  "atención",
+  "ATENCIÓN",
+  "Antencion",
+  "antencion",
+  "ATENCION",
+]).addAnswer([
+  "En desarrollo",
+  "🔗 https://agencyagartha.cl",
   "",
-  "Email",
-  "",
-  "-https://agencyagartha.cl/email-marketing/ ☑",
-  "",
-  "Media",
-  "",
-  "https://agencyagartha.cl/social-media-marketing/☑",
-  "",
-  "SEO",
-  "",
-  " - https://agencyagartha.cl/search-engine-optimization/☑",
-  "",
-  "Local",
-  "",
-  " - https://agencyagartha.cl/local-seo/",
-  "",
-  "Click",
-  " - https://agencyagartha.cl/pay-per-click-ppc-management/☑",
-  "",
-  "",
-  "ABC",
-  "",
-  "  - https://agencyagartha.cl/our-services/ ☑",
+  "Para volver atras escriba *pppp* ➡",
 ]);
 
-const flowAgartha = addKeyword(["Agartha", "documentacion", "documentación"]);
+const flowSoporteTecnico = addKeyword([
+  "Soporte Técnico",
+  "Soporte",
+  "soporte",
+  "SOPORTE",
+]).addAnswer([
+  "En desarrollo",
+  "🔗 https://agencyagartha.cl",
+  "",
+  "Para volver atras escriba *pppp* ➡",
+]);
 
-const flowTerminar = addKeyword(["Gracias", "grac"]).addAnswer(
+const flowSitioNo = addKeyword(["Nnn", "nnn", "NNN"]).addAnswer(
   [
-    "🚀 Puedes aportar tu granito de arena a este proyecto",
-    "[*opencollective*] https://opencollective.com/bot-whatsapp",
-    "[*buymeacoffee*] https://www.buymeacoffee.com/leifermendez",
-    "[*patreon*] https://www.patreon.com/leifermendez",
-    "\n*2* Para siguiente paso.",
+    "Si te interesa crear tu propia página web ingresa aquí 👇",
+    "🔗 https://agencyagartha.cl",
+    "",
+    "Para volver atras escriba *pppp* ➡",
+  ],
+  { capture: true },
+  (ctx, { fallBack }) => {
+    if (!ctx.body.includes("")) {
+      return fallBack();
+    }
+    console.log("Aquí viene todo: ", ctx.body);
+  }
+);
+
+const flowseo = addKeyword(["sss", "Sss", "SSS"]).addAnswer([
+  "https://agencyagartha.cl/local-seo/",
+  "",
+  "Escriba *pppp* para volver al menu",
+]);
+
+const flowsi = addKeyword(["vvv", "VVVV", "Vvv"]).addAnswer(
+  [
+    "⚠ Antes de indicanos tu página web, sigue el siguiente ejemplo :",
+    "",
+    "Primero se debe *eliminar* (https://) de la URL 👉 https://agencyagartha.cl",
+    "Para luego enviar 👉 *agencyagartha.cl*",
+  ],
+  { capture: true },
+  (ctx, { fallBack }) => {
+    if (!ctx.body.includes("sss")) {
+      fallBack(
+        "1 ingresa al link para analizar 👇\n\n 2 luego de tu nalisis escribe *SSS* para ayudarte a mejorar la pagina\n\npagespeed.web.dev/analysis?url=https%3A%2F%2F" +
+          ctx.body +
+          "%2F"
+      );
+    }
+
+    console.log("Aquí viene todo: ", ctx.body);
+  }
+);
+
+const flowAnalisis = addKeyword([
+  "ANALIZAR",
+  "Analizar",
+  "analizar",
+  "Análisis",
+  "Analisis",
+  "analisis",
+  "ANALISIS",
+]).addAnswer(
+  [
+    "¿Cuentas con una página web?",
+    "Coloque *VVV*✅ / Coloque *NNN*❌",
+    "",
+    "Para volver atras escriba *pppp* ➡",
+  ],
+  { capture: true },
+  (ctx, { fallBack }) => {
+    if (!ctx.body.includes("")) {
+      return fallBack();
+    }
+    console.log("Aquí viene todo: ", ctx.body);
+  }
+);
+const flowServicios = addKeyword([
+  "Menú",
+  "menú",
+  "MENÚ",
+  "Menu",
+  "menu",
+  "MENU",
+]).addAnswer([
+  "*Menú opciones 👇*",
+  "",
+  "*Email Marketing*",
+  "🔗 https://agencyagartha.cl/email-marketing/",
+  "",
+  "*Social Media Marketing*",
+  "🔗 https://agencyagartha.cl/social-media-marketing//",
+  "",
+  "*Search Engine Optimization*",
+  "🔗 https://agencyagartha.cl/search-engine-optimization/",
+  "",
+  "*Local SEO*",
+  "🔗 https://agencyagartha.cl/local-seo/",
+  "",
+  "*Pay Per Click*",
+  "🔗 https://agencyagartha.cl/pay-per-click-ppc-management/",
+  "",
+  "*ABC System*",
+  "🔗 https://agencyagartha.cl/our-services/",
+  "",
+  "Para volver atrás escriba *PPPP* ➡",
+]);
+
+const flowEscrito = addKeyword(["PPPP", "Pppp", "pppp"]).addAnswer(
+  [
+    "*Encuentra tu atención aquí 👇*",
+    "Para acceder a los servicios escriba el *nombre*",
+    "",
+    "Para acceder escriba *Menú*",
+    "👉 Servicios",
+    "",
+    "Para acceder escriba *Soporte*",
+    "👉 Soporte Técnico",
+    "",
+    "Para acceder escriba *Atención*",
+    "👉 Atención Comercial",
+    "",
+    "Para acceder escriba *Productos*",
+    "👉 Productos",
+    "",
+    "Para acceder escriba *Análisis*",
+    "👉 Analiza tu página web gratis!",
   ],
   null,
   null,
-  [flowSecundario]
+  [
+    flowServicios,
+    flowAnalisis,
+    flowSoporteTecnico,
+    flowAtencionComercial,
+    flowProductos,
+  ]
 );
 
-const flowSaludo = addKeyword(["Hola", "Buenas", "HOLA", "Hola"])
+const flowSaludo = addKeyword([
+  "HOLA,",
+  "Hola",
+  "OLA",
+  "Ola",
+  "hola",
+  "ola",
+  "BUNENAS",
+  "Buenas",
+  "buenas",
+])
   .addAnswer([
-    "Hola 😁 En Agartha Marketing Agency te damos la bienvenida.",
+    "Hola 🤖 En *Agartha Marketing Agency* te damos la bienvenida.",
     "Te has comunicado con Agartha Marketing Agency.",
     "",
     "Este es nuestro nuevo sistema de Chat Bot de Autoatención ABC System.",
     "Es una prueba Beta de este sistema por lo que agradecemos tu colaboración y sugerencias.",
     "Esta supervisada en tiempo real por ejecutivos humanos",
     "",
-    "Un gusto porder atenderte 🙌",
+    "Un gusto poder atenderte 🙌",
   ])
-
   .addAnswer(
-    "¿Tu Nombre?",
-    { capture: true },
-    (ctx, { fallBack }) => {
-      val = ctx.body
-      ab = abc.abecedario
-      cont = false
-      for (i = 0; i < ab.length; i++){
-        val.lastIndexOf(ab[i])
-        if(val.lastIndexOf(ab[i]) != -1){
-          cont = true
-        }
-      }if(cont === false){
-        return fallBack();
-      }
-      nombre = val
-    }
-  )
+    "su codigo de ingreso es *pppp* para ingresar al *Catálogo de Servicios* 📝"
+  );
 
-  .addAnswer(
-    "¿Tu Apellido Paterno?",
-    { capture: true  },
-    (ctx, { fallBack }) => {
-      val = ctx.body
-      ab = abc.abecedario
-      cont = false
-      for (i = 0; i < ab.length; i++){
-        val.lastIndexOf(ab[i])
-        if(val.lastIndexOf(ab[i]) != -1){
-          cont = true
-        }
-      }if(cont === false){
-        return fallBack();
-      }
-      paterno = val
-    }
-  )
-  .addAnswer(
-    "Apellido Materno",
-    { capture: true  },
-    (ctx, { fallBack }) => {
-      val = ctx.body
-      ab = abc.abecedario
-      cont = false
-      for (i = 0; i < ab.length; i++){
-        val.lastIndexOf(ab[i])
-        if(val.lastIndexOf(ab[i]) != -1){
-          cont = true
-        }
-      }if(cont === false){
-        return fallBack();
-      }
-      materno = val
-    }
-  )
-  .addAnswer(
-    "Correo Electronico",
-    { capture: true  },
-    (ctx, { fallBack }) => {
-      val = ctx.body
-      ab = abc.email
-      cont = false
-      for (i = 0; i < ab.length; i++){
-        val.lastIndexOf(ab[i])
-        if(val.lastIndexOf(ab[i]) != -1){
-          cont = true
-        }
-      }if(cont === false){
-        return fallBack();
-      }
-      correo = val
-      telefono = ctx.from
-    }
-  )
-
-  .addAnswer("Gracias por la Información, verificando datos de acceso 🕓",null,(ctx) => {
-    nom = nombre
-    pat = paterno
-    mat = materno
-    corr = correo    
-    phono = telefono
-    setDataToDB({'Nombre': nom ,'Apellidos': pat + ' ' +  mat, 'Correo': corr, 'Telefono': phono});
-  }
-  )
-  .addAnswer("datos guardados con exito", { delay: 1700 })
-  .addAnswer(
-    "Encuenta de Atencion coloca *siguiente*",
-    { capture: true  },
-    (ctx, { fallBack }) => {
-      if (!ctx.body.includes("siguiente")) {
-        return fallBack();
-      }
-      console.log("Aquí viene todo: ", ctx.body);
-    }
-  )
-  .addAnswer([
-    "*Indicanos en qué podemos ayudarte* 🌀",
-    "",
-    "Seleccione *1* ¿Cotizar Página Web?",
-    "",
-    "Seleccione *2* ¿Cotizar ABC System de Autoatención?",
-    "",
-    "Seleccione *3* ¿Comprar Canva Pro?",
-    "",
-    "Escribe *Listado* para ver todos nuestos links",
-    "",
-    "*Encuesta de nuestra atencion* 💭",
-    "",
-    "Escriba *7* ¿si me gusta?",
-    "",
-    "Escriba *8* ¿no me gusto?",
-    "",
-    "Ecriba *Finalizar* para terminar la conversacion",
-  ]);
-  const createTable  = () => {     
-    let query = "CREATE TABLE IF NOT EXISTS usuarios (nombre varchar(255), apellidos varchar(255), correo varchar(255), telefono numeric(15) PRIMARY KEY UNIQUE);";
-    connection.connect();
-    connection.query(query, function (error, results, fields) {
-      if (error) {
-        console.log(error)
-        //throw error;      
-      }
-    });     
-  }
-
-  const exists = async (datos) => {
-    let ex = false;    
-    let query = "SELECT * FROM usuarios WHERE correo = '"+datos.Correo+"';";
-    await connection.query(query, function (error, results, fields) {
-      if (error) throw error;
-      console.log(results, fields);
-      ex = fields.length > 0;
-    });     
-    return ex;
-  }
-
-  const setDataToDB = async (datos) => {        
-    if(await exists(datos) == false){     
-      console.log(datos);      
-      let query = "UPDATE usuarios set nombre='"+datos.Nombre+"',apellidos='"+datos.Apellidos+"', correo='"+datos.Correo+"' Where telefono='"+telefono+"'";
-      console.log(query);
-      connection.query(query, function (error, results, fields) {
-        if (error) throw error;      
-      });       
-      return true;
-    } else {
-      console.log("El usuario ya existe, no se puede guardar");
-      return false;
-    }    
-  }
-
-const main = async () => {  
+const main = async () => {
   const adapterDB = new MySQLAdapter({
     host: MYSQL_DB_HOST,
     user: MYSQL_DB_USER,
@@ -266,19 +217,12 @@ const main = async () => {
     password: MYSQL_DB_PASSWORD,
     port: MYSQL_DB_PORT,
   });
-  createTable();  
-    
   const adapterFlow = createFlow([
-    flowcomentario,
-    flownomegusto,
-    flowcanva,
-    flowmegusto,
     flowSaludo,
-    flowpregunta,
-    flowAgartha,
-    flowTerminar,
-    flowSecundario,
-    flowpmenu,
+    flowEscrito,
+    flowsi,
+    flowseo,
+    flowSitioNo,
   ]);
   const adapterProvider = createProvider(BaileysProvider);
   createBot({
