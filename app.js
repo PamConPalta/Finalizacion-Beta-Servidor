@@ -17,9 +17,9 @@ const abc = require("./arrays");
  * Declaramos las conexiones de MySQL
  */
 const MYSQL_DB_HOST = "localhost";
-const MYSQL_DB_USER = "pepito";
-const MYSQL_DB_PASSWORD = "11111";
-const MYSQL_DB_NAME = "pepito";
+const MYSQL_DB_USER = "kmilo";
+const MYSQL_DB_PASSWORD = "12345";
+const MYSQL_DB_NAME = "kmilo";
 const MYSQL_DB_PORT = "3306";
 
 const connection = mysql.createConnection({
@@ -225,7 +225,8 @@ const flowSaludo = addKeyword([
     "Esta supervisada en tiempo real por ejecutivos humanos",
     "",
     "Un gusto poder atenderte 🙌",
-  ],
+  ])
+  .addAnswer("Para verificar su cuenta, ingrese *Verificar*",
     { capture: true },
     (ctx, { fallBack }) => {
       fon = ctx.from
@@ -258,10 +259,16 @@ const flowSaludo = addKeyword([
             const resultado = cont.find(persona => persona.contacto === numRet)
             datos = resultado
             if(datos.nombre === null){ /** Este punto retorna todo el rato registro */
-              fallBack("ingrese registro para continuar")
+            if (!ctx.body.includes("Registro")) {
+              if (!ctx.body.includes("registro")) {
+              return fallBack("ingrese *Registro* para continuar")
+            }}
+              
             }else{/** Este punto debiese enviar el menu de wsp */
-              console.log("no es nulo")
-              console.log(datos.nombre)
+            if (!ctx.body.includes("pppp")) {
+              if (!ctx.body.includes("Pppp")) {
+              return fallBack("ud ya esta registrado para continuar ingrese *pppp* para ingresar al menu")
+            }}
           }
           }
         }
@@ -282,16 +289,25 @@ const flowSaludo = addKeyword([
           if(val.lastIndexOf(ab[i]) != -1){
             cont = true
           }
-        }if(cont === false){
-          return fallBack();
         }
+          if(cont === false){
+           
+              return fallBack("Ingrese un nombre correcto.")
+            }
+  
         nombre = val
+        fono = ctx.from
+        let query = "UPDATE usuarios set nombre='"+nombre+"' Where contacto='"+fono+"'";
+      console.log(query);
+      connection.query(query, function (error, results, fields) {
+        if (error) throw error;      
+      }); 
       }
       )
     
 
   .addAnswer(
-    "¿Tu Apellido Paterno?",
+    "¿Tus Apellidos?",
     { capture: true},
     (ctx, { fallBack }) => {
       val = ctx.body
@@ -306,26 +322,15 @@ const flowSaludo = addKeyword([
         return fallBack();
       }
       paterno = val
+      fono = ctx.from
+      let query = "UPDATE usuarios set apellidos='"+paterno+"' Where contacto='"+fono+"'";
+    console.log(query);
+    connection.query(query, function (error, results, fields) {
+      if (error) throw error;      
+    }); 
     }
   )
-  .addAnswer(
-    "¿Apellido Materno?",
-    { capture: true  },
-    (ctx, { fallBack }) => {
-      val = ctx.body
-      ab = abc.abecedario
-      cont = false
-      for(i = -1; i < ab.length; i++) {
-        val.lastIndexOf(ab[i])
-        if(val.lastIndexOf(ab[i]) != -1){
-          cont = true
-        }
-      }if(cont === false){
-        return fallBack();
-      }
-      materno = val
-    }
-  )
+
   .addAnswer(
     "Correo Electronico",
     { capture: true  },
@@ -343,55 +348,34 @@ const flowSaludo = addKeyword([
       }
       correo = val
       fono = ctx.from
+      
+      let query = "UPDATE usuarios set correo='"+correo+"' Where contacto='"+fono+"'";
+    console.log(query);
+    connection.query(query, function (error, results, fields) {
+      if (error) throw error;      
+    }); 
     }
   )
 
   .addAnswer("Gracias por la Información, verificando datos de acceso 🕓",null,(ctx) => {
     nom = nombre
     pat = paterno
-    mat = materno
     corr = correo
     fon = fono
-    setDataToDB({'Nombre': nom ,'Apellidos': pat + ' ' +  mat, 'Correo': corr, 'Contacto': fon});  
   }
   )
   .addAnswer("datos guardados con exito", { delay: 1700 }) 
   .addAnswer(
-    "fin coloca gracias *gracias*",
+    "fin coloca gracias *Gracias*",
     { capture: true /*buttons: [{ body: "❌ Cancelar solicitud" }]*/ },
     (ctx, { fallBack }) => {
-      if (!ctx.body.includes("gracias")) {
+      if (!ctx.body.includes("Gracias")) {
         return fallBack();
       }
       console.log("Aquí viene todo: ", ctx.body);
     }
   )
-
-  const exists = async (datos) => {
-    let ex = false;    
-    let query = "SELECT * FROM usuarios WHERE contacto = '"+datos.Contacto+"';";
-    await connection.query(query, function (error, results, fields) {
-      if (error) throw error;
-      console.log(results, fields);
-      ex = fields.length > 0;
-    });     
-    return ex;
-  }
-
-  const setDataToDB = async (datos) => {        
-    if(await exists(datos) == false){     
-      console.log(datos);      
-      let query = "INSERT INTO usuarios VALUES ('"+datos.Nombre+"', '"+datos.Apellidos+"', '"+datos.Correo+"', '"+datos.Contacto+"');";
-      console.log(query);
-      connection.query(query, function (error, results, fields) {
-        if (error) throw error;      
-      });       
-      return true;
-    } else {
-      console.log("El usuario ya existe, no se puede guardar");
-      return false;
-    }    
-  }
+  .addAnswer("ud ya esta registrado para continuar ingrese *pppp* para ingresar al menu");
 
 
 const main = async () => {
