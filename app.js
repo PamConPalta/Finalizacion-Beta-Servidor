@@ -9,15 +9,36 @@ const {
 const QRPortalWeb = require("@bot-whatsapp/portal");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const MySQLAdapter = require("@bot-whatsapp/database/mysql");
+const squel = require("squel");
+const mysql = require("mysql");
+const abc = require("./arrays");
 
 /**
  * Declaramos las conexiones de MySQL
  */
 const MYSQL_DB_HOST = "localhost";
-const MYSQL_DB_USER = "prueba";
-const MYSQL_DB_PASSWORD = "1234";
-const MYSQL_DB_NAME = "prueba";
+const MYSQL_DB_USER = "pepito";
+const MYSQL_DB_PASSWORD = "11111";
+const MYSQL_DB_NAME = "pepito";
 const MYSQL_DB_PORT = "3306";
+
+const connection = mysql.createConnection({
+  host     : MYSQL_DB_HOST,
+  user     : MYSQL_DB_USER,
+  password : MYSQL_DB_PASSWORD,
+  database : MYSQL_DB_NAME
+});
+
+const createTable  = () => {     
+  let query = "CREATE TABLE IF NOT EXISTS usuarios (nombre varchar(50), apellidos varchar(50), correo varchar(50), contacto numeric(15) primary key unique);";
+  connection.connect();
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      console.log(error)
+      //throw error;      
+    }
+  });     
+}
 
 const flowProductos = addKeyword([
   "Productos",
@@ -204,10 +225,174 @@ const flowSaludo = addKeyword([
     "Esta supervisada en tiempo real por ejecutivos humanos",
     "",
     "Un gusto poder atenderte 🙌",
-  ])
-  .addAnswer(
-    "su codigo de ingreso es *pppp* para ingresar al *Catálogo de Servicios* 📝"
+  ],
+    { capture: true },
+    (ctx, { fallBack }) => {
+      fon = ctx.from
+      numRet = []
+      cont = []
+      num = []
+      connection.connect;
+      let consulta = squel.select()
+      .field('nombre')
+      .field('contacto')
+      .from('usuarios');
+      
+      connection.query(consulta.toString(), function (error, registros, campos ){
+        if (error) {
+          throw error
+          }
+      
+        registros.forEach(function(registro, indice, arreglo){
+          num.push(registro.contacto)
+          cont.push({nombre: registro.nombre , contacto: registro.contacto})
+      
+          });
+      
+        for(i = -1; i < num.length; i++){
+          fon.lastIndexOf(num[i])
+          if(fon.lastIndexOf(num[i]) != -1){
+            numRet = num[i]
+            console.log("Este numero existe")
+            console.log(numRet)
+            const resultado = cont.find(persona => persona.contacto === numRet)
+            datos = resultado
+            if(datos.nombre === null){ /** Este punto retorna todo el rato registro */
+              fallBack("ingrese registro para continuar")
+            }else{/** Este punto debiese enviar el menu de wsp */
+              console.log("no es nulo")
+              console.log(datos.nombre)
+          }
+          }
+        }
+      })
+    }
   );
+
+  const flowRegistro = addKeyword(['registro','Registro'])
+  .addAnswer(
+    "¿Tu Nombre?",
+    { capture: true },
+    (ctx, { fallBack }) => {
+        val = ctx.body
+        ab = abc.abecedario
+        cont = false
+        for(i = -1; i < ab.length; i++) {
+          val.lastIndexOf(ab[i])
+          if(val.lastIndexOf(ab[i]) != -1){
+            cont = true
+          }
+        }if(cont === false){
+          return fallBack();
+        }
+        nombre = val
+      }
+      )
+    
+
+  .addAnswer(
+    "¿Tu Apellido Paterno?",
+    { capture: true},
+    (ctx, { fallBack }) => {
+      val = ctx.body
+      ab = abc.abecedario
+      cont = false
+      for(i = -1; i < ab.length; i++) {
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
+        return fallBack();
+      }
+      paterno = val
+    }
+  )
+  .addAnswer(
+    "¿Apellido Materno?",
+    { capture: true  },
+    (ctx, { fallBack }) => {
+      val = ctx.body
+      ab = abc.abecedario
+      cont = false
+      for(i = -1; i < ab.length; i++) {
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
+        return fallBack();
+      }
+      materno = val
+    }
+  )
+  .addAnswer(
+    "Correo Electronico",
+    { capture: true  },
+    (ctx, { fallBack }) => {
+      val = ctx.body
+      ab = abc.email
+      cont = false
+      for(i = -1; i < ab.length; i++) {
+        val.lastIndexOf(ab[i])
+        if(val.lastIndexOf(ab[i]) != -1){
+          cont = true
+        }
+      }if(cont === false){
+        return fallBack();
+      }
+      correo = val
+      fono = ctx.from
+    }
+  )
+
+  .addAnswer("Gracias por la Información, verificando datos de acceso 🕓",null,(ctx) => {
+    nom = nombre
+    pat = paterno
+    mat = materno
+    corr = correo
+    fon = fono
+    setDataToDB({'Nombre': nom ,'Apellidos': pat + ' ' +  mat, 'Correo': corr, 'Contacto': fon});  
+  }
+  )
+  .addAnswer("datos guardados con exito", { delay: 1700 }) 
+  .addAnswer(
+    "fin coloca gracias *gracias*",
+    { capture: true /*buttons: [{ body: "❌ Cancelar solicitud" }]*/ },
+    (ctx, { fallBack }) => {
+      if (!ctx.body.includes("gracias")) {
+        return fallBack();
+      }
+      console.log("Aquí viene todo: ", ctx.body);
+    }
+  )
+
+  const exists = async (datos) => {
+    let ex = false;    
+    let query = "SELECT * FROM usuarios WHERE contacto = '"+datos.Contacto+"';";
+    await connection.query(query, function (error, results, fields) {
+      if (error) throw error;
+      console.log(results, fields);
+      ex = fields.length > 0;
+    });     
+    return ex;
+  }
+
+  const setDataToDB = async (datos) => {        
+    if(await exists(datos) == false){     
+      console.log(datos);      
+      let query = "INSERT INTO usuarios VALUES ('"+datos.Nombre+"', '"+datos.Apellidos+"', '"+datos.Correo+"', '"+datos.Contacto+"');";
+      console.log(query);
+      connection.query(query, function (error, results, fields) {
+        if (error) throw error;      
+      });       
+      return true;
+    } else {
+      console.log("El usuario ya existe, no se puede guardar");
+      return false;
+    }    
+  }
+
 
 const main = async () => {
   const adapterDB = new MySQLAdapter({
@@ -217,12 +402,14 @@ const main = async () => {
     password: MYSQL_DB_PASSWORD,
     port: MYSQL_DB_PORT,
   });
+  createTable();  
   const adapterFlow = createFlow([
     flowSaludo,
     flowEscrito,
     flowsi,
     flowseo,
     flowSitioNo,
+    flowRegistro,
   ]);
   const adapterProvider = createProvider(BaileysProvider);
   createBot({
