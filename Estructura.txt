@@ -1,0 +1,204 @@
+
+
+** S A L U D O **
+
+Hola 🤖 En *Agartha Marketing Agency* te damos la bienvenida. Te has comunicado con Agartha Marketing Agency.
+Este es nuestro nuevo sistema de Chat Bot de Autoatención ABC System.
+Es una prueba Beta de este sistema por lo que agradecemos tu colaboración y sugerencias.
+
+Esta supervisada en tiempo real por ejecutivos humanos
+
+Un gusto porder atenderte 🙌",
+
+
+
+
+** F O R M U L A R I O **
+
+¿Cuál es tu Nombre?
+
+¿Cuál es tu apellido paterno?
+
+¿Cuál es tu apellido materno?
+
+Por último, nos gustaría saber tu correo electrónico para poder comunicarnos contigo
+
+Gracias por la información, verificando datos de acceso 🕓
+
+Datos guardados con éxito !
+
+
+
+
+** M E N Ú  DE  O P C I O N E S **
+
+
+Servicios
+
+    - Email Marketing
+        - https://agencyagartha.cl/email-marketing/
+
+    - Social Media Marketing
+        - https://agencyagartha.cl/social-media-marketing/
+
+    - Search Engine Optimization (SEO)
+        - https://agencyagartha.cl/search-engine-optimization/
+
+    - Local SEO
+        - https://agencyagartha.cl/local-seo/
+
+    - Pay Per Click
+        - https://agencyagartha.cl/pay-per-click-ppc-management/
+
+    - ABC System (BOT Chat)
+        - https://agencyagartha.cl/our-services/
+
+
+Soporte técnico
+
+    - (en desarrollo)
+
+Atención Comercial
+
+    - (en desarrollo)
+
+
+Productos
+
+https://agencyagartha.cl/shop/
+
+
+Analiza tu página web gratis!
+
+    - Si o No
+
+
+Haz tus preguntas 😄
+
+
+
+
+
+
+
+** P R E G U N T A S **
+
+Crea tu Formulario de Preguntas y Respuestas aquí 👇
+¿Quieres programar tus consultas frecuentes para los clientes?
+    - R: Si o No.
+
+
+¿Cuál es tu primera pregunta?
+    - R: ¿Metodo de pago?
+
+
+¿Cuál es tu segunda pregunta?
+    - R: Dirección
+
+
+¿Cuál es tu tercera pregunta?
+    - R: Calle
+
+
+¿Cuál es tu cuarta pregunta?
+    - R: Comuna
+
+
+
+    Tienes alguna otra duda o consulta
+
+
+
+** E N C U E S T A   D E   S A T I S F A C C I Ó N **
+
+Del 1 al 5 ¿Qué tan de acuerdo o desacuerdo esta con la interacción con el bot?
+
+Del 1 al 5 ¿Qué tan de acuerdo o desacuerdo esta con la empresa?
+
+Del 1 al 5 ¿Que tan facil fue utilizar nuestro Menú?
+
+Del 1 al 5 ¿Estás satisfecho/a con los servicios?
+
+
+
+
+** D E S P E D I D A - 1 **
+
+Gracias por comunicarte con *Agartha Marketing Agency* 🤗
+
+Para nosotros es muy importante conocer tu opinión. Te invitamos a responder la siguiente Encuesta de Satisfacción ! 😉
+
+Coloque *S* ✅ / Coloque *N* ❌
+
+
+
+** D E S P E D I D A - 2 **
+
+Te damos las gracias por tomarte el tiempo en responder 😁
+
+Nos vemos pronto en otra ocasión. ¡Qué tengas un excelente día!
+
+
+
+
+
+
+
+
+
+// D E S P E D I D A
+
+Salir
+¿Desea otro Servicio?
+
+    Si:
+        - Se envia el Menú.
+
+    No: 
+        - Mensaje de Despedida.
+        - Espera 5 minutos y envia el mensaje de termino.
+        - Después de despedida contabilizar 3 horas.
+
+
+
+
+Finalización
+
+Si/no
+
+Si: 
+Reiniciar menú y todo flujo hasta finalización (ciclo)
+
+No
+Despedida
+Sino hay respuesta Espera 5 -> despedida
+
+Después de despedida contabilizar 3 horas
+
+Saludo tipo 1 para primer saludo del día o después de las 3 horas
+Saludo tipo 2 dentro de las 3 horas después de un chat iniciado
+
+
+
+      // D E S P E D I D A
+      if (val === "salir" || val === "Salir" || val === "SALIR") {
+        flowDynamic([{ body: 
+          "Gracias por comunicarte con *Agartha Marketing Agency* 🤗" +
+          "\n" +
+          "\n" +
+          "Nos vemos pronto en otra ocasión. ¡Qué tengas un excelente día!",
+        }])
+        let cont = 0;
+        const tiempolimite = 20000; /**Tiempo de espera límite que equivale a 2 segundos */
+        const temporizador = setTimeout(() => {
+          flowDynamic([{
+            body: "_Su tiempo a alcanzado nuestro límite_"
+          }])
+        }, tiempolimite);
+      } 
+      else {
+        if (val != "Menu" || val === "menu" || val === "menú" || val === "Menú" && counter_intent === 0)
+          return fallBack("Ingrese Menú para poder continuar");
+      }
+    }
+  );

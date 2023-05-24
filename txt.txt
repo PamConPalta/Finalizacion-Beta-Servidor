@@ -1,0 +1,17 @@
+      if (counter_intent > 0) {
+        if (val === "servicios" || (val === "Servicios" && counter_intent > 0)) {
+          flowDynamic([{ body: "Aquí va el Servicios" }]);
+        }
+        else if (val === "soporte" || (val === "Soporte" && counter_intent > 0)) {
+          flowDynamic([{ body: "Aquí va el Soporte" }]);
+        }
+        else if (val === "atención" || (val === "Atención" && counter_intent > 0)) {
+          flowDynamic([{ body: "Aquí va la Atención" }]);
+        }
+        else if (val === "productos" || (val === "Productos" && counter_intent > 0)) {
+          flowDynamic([{ body: "Aquí van los Productos" }]);
+        }
+        else if (val === "análisis" || (val === "Análisis" && counter_intent > 0)) {
+          flowDynamic([{ body: "Aquí va el Análisis" }]);
+        }
+      }
